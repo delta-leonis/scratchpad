@@ -39,3 +39,6 @@ dependencies {
 }
 ```
 
+### Build using gradle
+
+Everything is good to go! If `gradle build` doesn't yield the expected result directly it might help to run `gradle clean` and `gradle dependencies` first.
