@@ -1,0 +1,23 @@
+import io.franzbecker.gradle.lombok.task.DelombokTask
+
+// Lombok Task
+lombok {
+    version = "1.16.10"
+}
+
+// Delombok Task
+task delombok(type: DelombokTask, dependsOn: compileJava) {
+    ext.outputDir = file("$buildDir/delombok")
+    outputs.dir(outputDir)
+    sourceSets.main.java.srcDirs.each { 
+        inputs.dir(it)
+        args(it, "-d", outputDir)
+    }
+}
+
+// Javadoc Task
+javadoc {
+    dependsOn delombok
+    source = delombok.outputDir
+    classpath = configurations.compile
+}
